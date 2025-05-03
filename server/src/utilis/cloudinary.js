@@ -35,17 +35,14 @@ const deleteOnCloudinary = async (imgaeURL) => {
         const res = await cloudinary.uploader.destroy(publicID);
 
         if (res.result !== "ok") {
-            return res.status(500).json({
-                success: false,
-                message: "Failed to delete image from Cloudinary"
-            });
+            return false
+        } else {
+            return true
         }
     }
     catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message || "An unexpected error occurred while deleting image"
-        });
+        console.log(error.message || "An unexpected error occurred while deleting image")
+        return false
     }
 }
 

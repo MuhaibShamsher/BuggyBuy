@@ -1,49 +1,31 @@
-// import React from 'react';
-// import { Container, Nav, Navbar } from 'react-bootstrap';
-// import { useSelector } from 'react-redux';
-// import { LinkContainer } from 'react-router-bootstrap';
-// // import AdminSidebar from './AdminSidebar';
-
-// const AdminHeader = () => {
-//     //   const { userInfo } = useSelector(state => state.auth);
-
-//     return (
-//         <Navbar
-//             bg='dark'
-//             variant='dark'
-//             expand='md'
-//             collapseOnSelect
-//             className='fixed-top'
-//         >
-//             <Container fluid>
-//                 <LinkContainer to='/admin/dashboard'>
-//                     <Navbar.Brand>MERN Shop Admin</Navbar.Brand>
-//                 </LinkContainer>
-//                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
-//                 <Navbar.Collapse id='basic-navbar-nav'>
-//                     <Nav className='ms-auto m-2 '>
-//                         {/* <Nav.Link> Hello,👋{userInfo?.name}</Nav.Link> */}
-//                         <Nav.Link> Hello,👋</Nav.Link>
-//                         <div className='d-md-none '>
-//                             {/* <AdminSidebar /> */}
-//                         </div>
-//                     </Nav>
-//                 </Navbar.Collapse>
-//             </Container>
-//         </Navbar>
-//     );
-// };
-
-// export default AdminHeader;
+import React from 'react';
+import AdminSidebar from './AdminSidebar.jsx';
+import { Link } from 'react-router-dom';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 
+export default function AdminHeader() {
 
-import React from 'react'
-
-function AdminHeader() {
   return (
-    <div>AdminHeader</div>
+    <Navbar
+      bg='dark'
+      variant='dark'
+      expand='md'
+      collapseOnSelect
+    >
+      <Container fluid>
+        <Link to='/admin/dashboard' className='m-3 text-decoration-none text-white'>
+          <Navbar.Brand className='fw-bold'>Admin Panel</Navbar.Brand>
+        </Link>
+
+        <div className="text-end">
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+
+          <Navbar.Collapse id='basic-navbar-nav' >
+            <AdminSidebar />
+          </Navbar.Collapse>
+        </div>
+      </Container>
+    </Navbar>
   )
 }
-
-export default AdminHeader

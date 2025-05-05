@@ -90,7 +90,7 @@ const logoutUser = async (req, res) => {
       secure: false,
       sameSite: 'none'
     }
-  
+
     return res
       .status(200)
       .clearCookie("accessToken", options)
@@ -101,9 +101,42 @@ const logoutUser = async (req, res) => {
   }
 }
 
+const deleteUser = async (req, res) => {
+  try {
+    const { id: userId } = req.params;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
+
+    await User.deleteOne({ _id: user._id });
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error' });
+  }
+}
+
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({ isAdmin: false });
+
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: 'No users found!' });
+    }
+
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error' });
+  }
+}
 
 export {
   userRegister,
   userLogin,
-  logoutUser
+  logoutUser,
+  deleteUser,
+  getAllUsers
 }

@@ -194,7 +194,7 @@ const deleteProduct = async (req, res) => {
 const createProductReview = async (req, res) => {
     try {
         const { id: productId } = req.params;
-        const { rating, name, userId } = req.body;
+        const { userId, name, rating, comment } = req.body;
         
         const product = await Product.findById(productId);
         if (!product) {
@@ -206,8 +206,10 @@ const createProductReview = async (req, res) => {
         
         // Create a new review
         const newReview = await Review.create({
+            product: productId,
             user: userId,
             name,
+            comment,
             rating: Number(rating)
         });
 

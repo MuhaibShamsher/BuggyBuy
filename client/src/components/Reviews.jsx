@@ -1,27 +1,37 @@
 import React from 'react';
+import Rating from './Rating';
 import Message from './Message';
 import { Link } from 'react-router-dom';
 import { Button, Form, ListGroup } from 'react-bootstrap';
-import Rating from './Rating';
 
-const Reviews = ({
-    product,
+
+export default function Reviews({
+    reviews,
     userInfo,
-    submitHandler,
+    comment,
+    setComment,
     rating,
     setRating,
-    loading
-}) => {
+    loading,
+    submitHandler
+}) {
+
     return (
         <>
             <h5>Reviews</h5>
-            {product.reviews.length === 0 && <Message>No Reviews</Message>}
-
             <ListGroup variant='flush'>
-                {product.reviews.map(review => (
-                    <ListGroup.Item key={review._id}>
-                        <strong>{review.name}</strong>
-                        <Rating value={review.rating} />
+                {reviews?.map(review => (
+                    <ListGroup.Item
+                        key={review._id}
+                        className="shadow-sm rounded-3 mb-3 p-3 bg-light border-0"
+                    >
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                            <strong className="text-primary">{review.name}</strong>
+                            <Rating value={review.rating} />
+                        </div>
+                        <p className="mb-0 text-secondary" style={{ fontSize: '0.95rem' }}>
+                            {review.comment}
+                        </p>
                     </ListGroup.Item>
                 ))}
 
@@ -44,7 +54,19 @@ const Reviews = ({
                                     <option value='5'>5 - Excellent</option>
                                 </Form.Control>
                             </Form.Group>
-                            
+
+                            <Form.Group className='my-2' controlId='comment'>
+                                <Form.Label>Comment</Form.Label>
+                                <Form.Control
+                                    as='textarea'
+                                    rows={3}
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    placeholder='Write your review here...'
+                                    required
+                                />
+                            </Form.Group>
+
                             <Button
                                 className='w-100'
                                 disabled={loading}
@@ -63,6 +85,4 @@ const Reviews = ({
             </ListGroup>
         </>
     );
-};
-
-export default Reviews;
+}

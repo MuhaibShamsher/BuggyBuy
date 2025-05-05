@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../../store/slices/auth.slice.js';
 import FormContainer from '../../components/FormContainer.jsx';
-// import { useLoginMutation } from '../slices/usersApiSlice';
 import Loader from '../../components/Loader.jsx';
 
 import { Form, Button, Row, Col, InputGroup } from 'react-bootstrap';
@@ -42,6 +41,10 @@ export default function LoginPage() {
 
       if (!res.ok) {
         throw new Error(data.message || 'Login failed');
+      }
+
+      if(data.isAdmin === true) {
+        throw new Error('User not found');
       }
 
       dispatch(setCredentials({ ...data }));

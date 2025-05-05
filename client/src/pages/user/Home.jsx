@@ -4,42 +4,55 @@ import Product from '../../components/Product.jsx';
 import Loader from '../../components/Loader.jsx';
 import Message from '../../components/Message.jsx';
 import Paginate from '../../components/Paginate.jsx';
-// import ProductCarousel from '../../components/ProductCarousel';
-// import ServerError from '../components/ServerError';
-// import { useGetProductsQuery } from '../slices/productsApiSlice';
-import { Row, Col } from 'react-bootstrap';
+import OrderLookupForm from '../../components/TrackOrderModal.jsx';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 export default function HomePage() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(0);
-    const [total, setTotal] = useState(0);
-    const [limit, setLimit] = useState(0);
-    const [skip, setSkip] = useState(0);
-    const { search } = useSelector(state => state.search);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { search } = useSelector(state => state.search)
 
-    const isLoading = true
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const limit = 12;
 
-  //   const { data, isLoading, error } = useGetProductsQuery({
-  //     limit,
-  //     skip,
-  //     search
-  //   });
+  const fetchProducts = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const skip = (currentPage - 1) * limit;
 
-    // useEffect(() => {
-    //   if (data) {
-    //     setLimit(4);
-    //     setSkip((currentPage - 1) * limit);
-    //     setTotal(data.total);
-    //     setTotalPage(Math.ceil(total / limit));
-    //   }
-    // }, [currentPage, data, limit, total, search]);
+      const res = await fetch(
+        `http://localhost:5000/api/v1/products?limit=${limit}&skip=${skip}&search=${search}`
+      );
+      const fetchData = await res.json();
+      const data = fetchData.data
 
-    const pageHandler = pageNum => {
-      if (pageNum >= 1 && pageNum <= totalPage && pageNum !== currentPage) {
-        setCurrentPage(pageNum);
-      }
-    };
+      if (!res.ok) throw new Error(data.message || 'Failed to fetch products');
+
+      setProducts(data.products);
+      setTotal(data.total);
+      setTotalPage(Math.ceil(data.total / limit));
+
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, [currentPage, search])
+
+  const pageHandler = (pageNum) => {
+    if (pageNum >= 1 && pageNum <= totalPage && pageNum !== currentPage) {
+      setCurrentPage(pageNum);
+    }
+  }
 
   return (
     <>
@@ -52,22 +65,27 @@ export default function HomePage() {
           </Message>
         ) : (
           <>
-            {!search && <ProductCarousel />}
-            <h1>Latest Products</h1>
-            <Row>
-              {data.products.map(product => (
-                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                  <Product product={product} />
-                </Col>
-              ))}
-            </Row>
-            {totalPage > 1 && !search && (
-              <Paginate
-                currentPage={currentPage}
-                totalPage={totalPage}
-                pageHandler={pageHandler}
-              />
-            )}
+            <Container style={{ marginTop: '6rem' }}>
+              <div>
+                <OrderLookupForm />
+              </div>
+              <h1>Latest Products</h1>
+              <Row>
+                {products.map(product => (
+                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Product product={product} />
+                  </Col>
+                ))}
+              </Row>
+
+              {totalPage > 1 && (
+                <Paginate
+                  currentPage={currentPage}
+                  totalPage={totalPage}
+                  pageHandler={pageHandler}
+                />
+              )}
+            </Container>
           </>
         )
       }

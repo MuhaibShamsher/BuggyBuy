@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBox from './SearchBox';
+import TrackOrderModal from '../TrackOrderModal.jsx';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/auth.slice.js';
@@ -13,6 +14,11 @@ import { toast } from 'react-toastify';
 export default function Header() {
   const { userInfo } = useSelector(state => state.auth);
   const { cartItems } = useSelector(state => state.cart);
+
+  const [showTrackModal, setShowTrackModal] = useState(false)
+  const openModal = () => setShowTrackModal(true)
+  const closeModal = () => setShowTrackModal(false)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -70,9 +76,14 @@ export default function Header() {
                 id='username'
                 className='text-white'
               >
-                <Link to='/profile' className="text-decoration-none">
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
-                </Link>
+                <NavDropdown.Item>
+                  <Link to='/profile' className="text-decoration-none">
+                    Profile
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={openModal}>
+                  Track Order
+                </NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>
                   Logout
                 </NavDropdown.Item>
@@ -89,6 +100,8 @@ export default function Header() {
             )}
           </Nav>
         </Navbar.Collapse>
+
+        <TrackOrderModal show={showTrackModal} handleClose={closeModal} />
       </Container>
     </Navbar>
   );

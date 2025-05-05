@@ -5,13 +5,15 @@ import {
     updateOrderToDeliver,
     getOrderById,
     updateOrderToPaid,
-    getMyOrders
+    getMyOrders,
+    getOrders
 } from '../controllers/order.controller.js'
 
 const router = Router()
 
 router.route('/')
     .post(addOrderItems)
+    .get(getOrders)
 
 router.route('/:id')
     .get(getOrderById)

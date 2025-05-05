@@ -97,7 +97,7 @@ export default function Sidebar() {
 
             <Button 
                 onClick={logoutHandler}
-                className='mx-4'
+                className="ms-4"
             >
                 <strong>
                     <FaPowerOff

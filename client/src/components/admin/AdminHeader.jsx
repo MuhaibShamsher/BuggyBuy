@@ -1,31 +1,25 @@
 import React from 'react';
-import AdminSidebar from './AdminSidebar.jsx';
 import { Link } from 'react-router-dom';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import { FaBug } from 'react-icons/fa';
+import AdminSidebar from './AdminSidebar.jsx';
 
 export default function AdminHeader() {
-
   return (
-    <Navbar
-      bg='dark'
-      variant='dark'
-      expand='md'
-      collapseOnSelect
-    >
-      <Container fluid>
-        <Link to='/admin/dashboard' className='m-3 text-decoration-none text-white'>
-          <Navbar.Brand className='fw-bold'>Admin Panel</Navbar.Brand>
+    <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect sticky='top' className='shadow'>
+      <Container>
+        <Link to='/admin/dashboard' className='navbar-brand d-flex align-items-center gap-2 text-warning fw-bold fs-4 mb-0'>
+          <FaBug /> Admin Panel
         </Link>
 
-        <div className="text-end">
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Toggle aria-controls='admin-navbar-nav' className='ms-auto border-0' />
 
-          <Navbar.Collapse id='basic-navbar-nav' >
+        <Navbar.Collapse id='admin-navbar-nav'>
+          <Nav className='ms-auto'>
             <AdminSidebar />
-          </Navbar.Collapse>
-        </div>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
+  );
 }

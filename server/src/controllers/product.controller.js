@@ -194,21 +194,23 @@ const deleteProduct = async (req, res) => {
 const createProductReview = async (req, res) => {
     try {
         const { id: productId } = req.params;
-        const { rating, name } = req.body;
-
+        const { rating, name, userId } = req.body;
+        
         const product = await Product.findById(productId);
         if (!product) {
             return res.status(404).json({ message: 'Product not found!' });
         }
-
+        
         // Get all existing reviews for this product
         const reviews = await Review.find({ _id: { $in: product.reviews } });
-
+        
         // Create a new review
         const newReview = await Review.create({
+            user: userId,
             name,
             rating: Number(rating)
         });
+
 
         // Add review reference to product
         product.reviews.push(newReview._id);

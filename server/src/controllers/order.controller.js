@@ -142,10 +142,30 @@ const getMyOrders = async (req, res) => {
 };
 
 
+// @desc     Get all orders
+// @method   GET
+// @endpoint /api/v1/orders
+// @access   Private/Admin
+const getOrders = async (req, res) => {
+    try {
+        const orders = await Order.find().populate('user', 'id name');
+
+        if (!orders || orders.length === 0) {
+            return res.status(404).json({ message: 'Orders not found!' });
+        }
+
+        res.status(200).json(orders);
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Server Error' });
+    }
+};
+
+
 export {
     addOrderItems,
     updateOrderToDeliver,
     getOrderById,
     updateOrderToPaid,
-    getMyOrders
+    getMyOrders,
+    getOrders
 }

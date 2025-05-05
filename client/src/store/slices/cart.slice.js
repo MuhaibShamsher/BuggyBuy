@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { updateCart } from '../../utilis/cart.utilis.js';
 
 const initialState = localStorage.getItem('cart')
-  ? JSON.parse(localStorage.getItem('cart'))
-  : { cartItems: [], shippingAddress: {}, paymentMethod: 'Cash on Delivery' };
+    ? JSON.parse(localStorage.getItem('cart'))
+    : { cartItems: [], shippingAddress: {}, paymentMethod: 'Cash on Delivery' };
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -13,36 +13,42 @@ const cartSlice = createSlice({
             const newItem = action.payload;
             const existItem = state.cartItems.find(item => item._id === newItem._id);
 
-            if (!existItem) {
+            if (existItem) {
+                state.cartItems = state.cartItems.map(
+                    item => item._id === existItem._id ? newItem : item
+                )
+            } else {
                 state.cartItems.push(newItem);
             }
 
-            return updateCart(state);
+            updateCart(state);
         },
 
         removeFromCart: (state, action) => {
             const id = action.payload;
             state.cartItems = state.cartItems.filter(item => item._id !== id);
 
-            return updateCart(state);
+            updateCart(state);
         },
 
         saveShippingAddress: (state, action) => {
             state.shippingAddress = action.payload;
-            return updateCart(state);
+            updateCart(state);
         },
 
         savePaymentMethod: (state, action) => {
             state.paymentMethod = action.payload;
-            return updateCart(state);
+            updateCart(state);
         },
 
         clearCartItems: (state, action) => {
             state.cartItems = [];
-            return updateCart(state);
+            updateCart(state);
+            localStorage.removeItem('cart')
         }
     }
 });
+
 
 export const {
     addToCart,

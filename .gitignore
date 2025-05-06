@@ -29,7 +29,7 @@ server/node_modules/
 
 # Ignore environment files
 client/.env
-# server/.env
+server/.env
 
 # Ignore build/output folders (optional)
 client/dist/

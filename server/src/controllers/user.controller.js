@@ -8,8 +8,6 @@ const userRegister = async (req, res) => {
     return res.status(400).json({ message: 'All fields are required!' });
   }
 
-  const hashPassword = crypto.createHash('md5').update(password).digest('hex');
-
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -23,7 +21,7 @@ const userRegister = async (req, res) => {
     const newUser = new User({
       name,
       email,
-      password: hashPassword
+      password
     });
 
     await newUser.save();
@@ -36,22 +34,16 @@ const userRegister = async (req, res) => {
 }
 
 const userLogin = async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
+  if (!req.body.email || !req.body.password) {
     return res.status(400).json({ message: 'All fields are required!' });
   }
 
-  const hashedPassword = crypto.createHash('md5').update(password).digest('hex');
-
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne(req.body);
+    // const user = await User.findOne({ email: { $ne: null }, password: { $ne: null } })
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
-    }
-
-    if (user.password !== hashedPassword) {
-      return res.status(404).json({ message: 'Incorrect password' });
     }
 
     const accessToken = user.generateAccessToken();
@@ -82,6 +74,7 @@ const userLogin = async (req, res) => {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+
 
 const logoutUser = async (req, res) => {
   try {

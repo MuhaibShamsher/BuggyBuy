@@ -66,7 +66,7 @@ export default function LoginPage() {
         <Form.Group className='mb-3' controlId='email'>
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            type='email'
+            type='text'
             value={email}
             placeholder='Enter email'
             onChange={e => setEmail(e.target.value)}

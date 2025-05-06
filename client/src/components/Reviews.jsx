@@ -29,9 +29,10 @@ export default function Reviews({
                             <strong className="text-primary">{review.name}</strong>
                             <Rating value={review.rating} />
                         </div>
-                        <p className="mb-0 text-secondary" style={{ fontSize: '0.95rem' }}>
+                        {/* <p className="mb-0 text-secondary" style={{ fontSize: '0.95rem' }}>
                             {review.comment}
-                        </p>
+                        </p> */}
+                        <p className="mb-0 text-secondary" dangerouslySetInnerHTML={{ __html: review.comment }}></p>
                     </ListGroup.Item>
                 ))}
 

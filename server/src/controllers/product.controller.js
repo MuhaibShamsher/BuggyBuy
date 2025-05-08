@@ -13,17 +13,34 @@ const getAllProducts = async (req, res) => {
 
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), maxLimit);
     const skip = Math.max(parseInt(req.query.skip) || 0, 0);
-    const search = req.query.search?.trim() || '';
+    // const search = req.query.search?.trim() || '';
+    const search = req.query.search;
 
     try {
-        const query = search
-            ? {
-                $or: [
-                    { name: { $regex: search, $options: 'i' } },
-                    { brand: { $regex: search, $options: 'i' } }
-                ]
+        // const query = search
+        //     ? {
+        //         $or: [
+        //             { name: { $regex: search, $options: 'i' } },
+        //             { brand: { $regex: search, $options: 'i' } }
+        //         ]
+        //     }
+        //     : {};
+        let query = {};
+
+        if (search) {
+            try {
+                // This will allow NoSQL injection if JSON is provided
+                query = JSON.parse(search);
+            } catch {
+                // If not JSON, treat it as a simple string search
+                query = {
+                    $or: [
+                        { name: { $regex: search, $options: 'i' } },
+                        { brand: { $regex: search, $options: 'i' } }
+                    ]
+                };
             }
-            : {};
+        }
 
         const products = await Product.find(query)
             .limit(limit)

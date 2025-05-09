@@ -18,7 +18,7 @@ export default function UserListPage() {
   const fetchUsers = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('http://localhost:5000/api/v1/users', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
         credentials: 'include',
       });
 
@@ -40,7 +40,7 @@ export default function UserListPage() {
   const deleteHandler = async (userId) => {
     try {
       setDeletingUserId(userId);
-      const res = await fetch(`http://localhost:5000/api/v1/users/${userId}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users/${userId}`, {
         method: 'DELETE',
         credentials: 'include',
       });

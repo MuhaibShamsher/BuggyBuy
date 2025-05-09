@@ -24,7 +24,7 @@ export default function ProductFormPage() {
     if (isUpdateMode) {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/api/v1/products/${productId}`);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`);
         if (!res.ok) throw new Error('Failed to fetch product');
         const data = await res.json();
         setName(data.name);
@@ -62,8 +62,8 @@ export default function ProductFormPage() {
       setLoading(true);
       const res = await fetch(
         isUpdateMode
-          ? `http://localhost:5000/api/v1/products/${productId}`
-          : 'http://localhost:5000/api/v1/products',
+          ? `${process.env.REACT_APP_API_URL}/products/${productId}`
+          : `${process.env.REACT_APP_API_URL}/products`,
         {
           method: 'POST',
           body: formData

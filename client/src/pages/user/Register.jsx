@@ -20,7 +20,6 @@ export default function RegisterPage() {
   const [showConfirmPassword, setConfirmShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -36,7 +35,7 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/v1/users/register', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

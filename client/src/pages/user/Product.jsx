@@ -40,7 +40,7 @@ export default function ProductPage() {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/v1/products/${productId}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`);
 
       if (!res.ok) throw new Error('Failed to fetch product');
 
@@ -57,7 +57,7 @@ export default function ProductPage() {
   const fetchReviews = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/v1/reviews/${productId}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/reviews/${productId}`, {
         method: "GET"
       });
 
@@ -88,7 +88,7 @@ export default function ProductPage() {
     e.preventDefault();
     try {
       setReviewLoading(true);
-      const res = await fetch(`http://localhost:5000/api/v1/products/reviews/${productId}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/products/reviews/${productId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export default function ProductPage() {
       await fetchReviews();
 
       // Refresh product
-      const updatedRes = await fetch(`http://localhost:5000/api/v1/products/${productId}`);
+      const updatedRes = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`);
       const updatedData = await updatedRes.json();
       setProduct(updatedData);
 

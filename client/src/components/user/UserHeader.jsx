@@ -24,7 +24,7 @@ export default function Header() {
 
   const logoutHandler = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/users/logout', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users/logout`, {
         method: 'GET',
         credentials: 'include'
       });

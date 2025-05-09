@@ -28,7 +28,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/v1/users/login', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,3 @@
-import React from 'react';
 import Message from '../../components/Message.jsx';
 import addCurrency from '../../utilis/currency.utilis.js';
 import { addToCart, removeFromCart } from '../../store/slices/cart.slice.js';

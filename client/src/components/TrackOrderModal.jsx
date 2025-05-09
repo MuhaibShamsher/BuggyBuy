@@ -14,7 +14,7 @@ export default function TrackOrderModal({ show, handleClose }) {
     setError('')
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/orders/${orderId}`)
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}`)
       if (!response.ok) {
         throw new Error('Order not found')
       }

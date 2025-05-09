@@ -26,7 +26,7 @@ export default function HomePage() {
       const skip = (currentPage - 1) * limit;
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/products?limit=${limit}&skip=${skip}&search=${search}`
+        `${import.meta.env.VITE_API_URL}/products?limit=${limit}&skip=${skip}&search=${search}`
       );
       const fetchData = await res.json();
       const data = fetchData.data

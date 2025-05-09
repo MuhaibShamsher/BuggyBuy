@@ -22,7 +22,7 @@ export default function OrderDetails() {
   const fetchOrder = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/${orderId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export default function OrderDetails() {
   const paymentHandler = async () => {
     try {
       setLoadingPay(true);
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/${orderId}/pay`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/pay`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export default function OrderDetails() {
     try {
 
       setLoadingDeliver(true);
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/${orderId}/deliver`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/${orderId}/deliver`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

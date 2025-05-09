@@ -24,7 +24,7 @@ export default function ProductFormPage() {
     if (isUpdateMode) {
       setLoading(true);
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/products/${productId}`);
         if (!res.ok) throw new Error('Failed to fetch product');
         const data = await res.json();
         setName(data.name);
@@ -62,8 +62,8 @@ export default function ProductFormPage() {
       setLoading(true);
       const res = await fetch(
         isUpdateMode
-          ? `${process.env.REACT_APP_API_URL}/products/${productId}`
-          : `${process.env.REACT_APP_API_URL}/products`,
+          ? `${import.meta.env.VITE_API_URL}/products/${productId}`
+          : `${import.meta.env.VITE_API_URL}/products`,
         {
           method: 'POST',
           body: formData

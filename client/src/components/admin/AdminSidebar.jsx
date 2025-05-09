@@ -20,7 +20,7 @@ export default function Sidebar() {
 
     const logoutHandler = async () => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/users/logout`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/users/logout`, {
                 method: 'GET',
                 credentials: 'include'
             })

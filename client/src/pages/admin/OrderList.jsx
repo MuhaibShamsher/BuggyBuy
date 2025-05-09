@@ -20,7 +20,7 @@ export default function OrderList() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/orders`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
         method: "GET"
       });
 

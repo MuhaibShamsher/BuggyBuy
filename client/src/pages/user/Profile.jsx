@@ -19,7 +19,7 @@ export default function Profile() {
         try {
             setLoading(true);
             setError('');
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/orders/my-orders/${userInfo.userId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/orders/my-orders/${userInfo.userId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

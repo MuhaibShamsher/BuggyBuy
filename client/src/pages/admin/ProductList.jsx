@@ -27,7 +27,7 @@ export default function ProductList() {
       const skip = (currentPage - 1) * limit;
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/products?limit=${limit}&skip=${skip}`
+        `${import.meta.env.VITE_API_URL}/products?limit=${limit}&skip=${skip}`
       );
       const fetchData = await res.json();
       const data = fetchData.data
@@ -52,7 +52,7 @@ export default function ProductList() {
   const deleteHandler = async (productId) => {
     try {
       setIsDeleteLoading(true);
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/products/${productId}`, {
         method: 'DELETE',
       });
       

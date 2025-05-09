@@ -6,12 +6,11 @@ const app = express();
 
 app.use(
     cors({
-        origin: (origin, callback) => {
-            callback(null, origin);
-        },
+        origin: process.env.CORS_ORIGIN,
         credentials: true
     })
-)
+);
+
 
 app.use(express.json({ limit: '30kb' }))
 app.use(express.urlencoded({ extended: true, limit: '30kb' }))

@@ -28,7 +28,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
+      const res = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,13 +37,22 @@ export default function LoginPage() {
          credentials: 'include'
       });
 
+      // const res = await fetch(`http://localhost:5000/api/v1/users/login`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ email, password }),
+      //    credentials: 'include'
+      // });
+
       const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.message || 'Login failed');
       }
 
-      if(data.isAdmin === true) {
+      if (data.isAdmin === true) {
         throw new Error('User not found');
       }
 

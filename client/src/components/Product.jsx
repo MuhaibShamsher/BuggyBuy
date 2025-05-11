@@ -4,7 +4,7 @@ import { addToCart } from '../store/slices/cart.slice.js'
 import addCurrency from '../utilis/currency.utilis.js'
 import Rating from './Rating.jsx'
 import { Button, Card } from 'react-bootstrap'
-
+import { toast } from 'react-toastify'
 
 export default function Product({ product }) {
     const qty = 1;
@@ -12,6 +12,7 @@ export default function Product({ product }) {
 
     const addToCartHandler = () => {
         dispatch(addToCart({ ...product, qty }))
+        toast.success('Added to Cart');
     };
 
     return (

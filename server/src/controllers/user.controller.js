@@ -1,8 +1,7 @@
 import User from '../models/user.model.js'
-import crypto from 'crypto'
 
 const userRegister = async (req, res) => {
-  const { name, email, password, confirmPassword } = req.body;
+  const { name, email, password, confirmPassword, isAdmin } = req.body;
 
   if (!name || !email || !password || !confirmPassword) {
     return res.status(400).json({ message: 'All fields are required!' });
@@ -21,7 +20,8 @@ const userRegister = async (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
+      isAdmin
     });
 
     await newUser.save();
@@ -74,7 +74,6 @@ const userLogin = async (req, res) => {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
-
 
 const logoutUser = async (req, res) => {
   try {

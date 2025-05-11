@@ -1,93 +1,58 @@
-// import React from 'react';
-// import { Row, Col, Card } from 'react-bootstrap';
-// import { FaStore, FaUsers, FaShoppingBag, FaWallet } from 'react-icons/fa';
-
-// // import { useGetProductsQuery } from '../../slices/productsApiSlice';
-// // import { useGetUsersQuery } from '../../slices/usersApiSlice';
-// // import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
-
-// import { addCurrency } from '../../utilis/currency.utilis.js';
-
-// import Loader from '../../components/Loader.jsx';
-// import ProductPriceChart from '../../components/admin/ProductPriceChart.jsx';
-// import OrderPriceChart from '../../components/admin/OrderPriceChart.jsx';
-// import DashboardCard from '../../components/admin/DashboardCard.jsx';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-// const Dashboard = () => {
-//   const { data, isLoading } = useGetProductsQuery({});
-//   const { data: users, isLoading: isUsersLoading } = useGetUsersQuery({});
-//   const { data: orders, isLoading: isOrdersLoading } = useGetOrdersQuery({});
+const AdminDashboard = () => {
+  const navigate = useNavigate();
 
-//   return (
-//     <>
-//       {isLoading || isUsersLoading || isOrdersLoading ? (
-//         <Loader />
-//       ) : (
-//         <>
-//           <Row>
-//             <Meta title={'Admin Dashboard'} />
-//             <Col md={6} lg={3} className='position-relative'>
-//               <DashboardCard
-//                 title={'Products'}
-//                 icon={<FaStore size={40} />}
-//                 value={data?.total}
-//                 bgColor={'bg-info'}
-//               />
-//             </Col>
-//             <Col md={6} lg={3} className='position-relative'>
-//               <DashboardCard
-//                 title={'Users'}
-//                 icon={<FaUsers size={40} />}
-//                 value={users?.length}
-//                 bgColor={'bg-danger'}
-//               />
-//             </Col>
-//             <Col md={6} lg={3} className='position-relative'>
-//               <DashboardCard
-//                 title={'Orders'}
-//                 icon={<FaShoppingBag size={40} />}
-//                 value={orders?.length}
-//                 bgColor={'bg-warning'}
-//               />
-//             </Col>
-//             <Col md={6} lg={3} className='position-relative'>
-//               <DashboardCard
-//                 title={'Revenue'}
-//                 icon={<FaWallet size={40} />}
-//                 value={addCurrency(
-//                   orders?.reduce((acc, item) => acc + item.totalPrice, 0)
-//                 )}
-//                 bgColor={'bg-success'}
-//               />
-//             </Col>
-//           </Row>
+  return (
+    <div className="container py-5">
+      <h2 className="text-center text-primary mb-5">Admin Dashboard</h2>
+      <div className="row g-4 justify-content-center">
+        {/* Orders */}
+        <div className="col-md-4">
+          <div
+            className="card text-white bg-warning h-100 shadow"
+            role="button"
+            onClick={() => navigate('/admin/order-list')}
+          >
+            <div className="card-body text-center">
+              <h5 className="card-title">Orders</h5>
+              <p className="card-text">View and manage customer orders.</p>
+            </div>
+          </div>
+        </div>
 
-//           <Row>
-//             <Col md={12} lg={6}>
-//               <ProductPriceChart products={data?.products} />
-//             </Col>
-//             <Col md={12} lg={6}>
-//               <OrderPriceChart orders={orders} />
-//             </Col>
-//           </Row>
-//         </>
-//       )}
-//     </>
-//   );
-// };
+        {/* Products */}
+        <div className="col-md-4">
+          <div
+            className="card text-white bg-primary h-100 shadow"
+            role="button"
+            onClick={() => navigate('/admin/product-list')}
+          >
+            <div className="card-body text-center">
+              <h5 className="card-title">Products</h5>
+              <p className="card-text">Check and edit product listings.</p>
+            </div>
+          </div>
+        </div>
 
-// export default Dashboard;
+        {/* Users */}
+        <div className="col-md-4">
+          <div
+            className="card text-white bg-warning h-100 shadow"
+            role="button"
+            onClick={() => navigate('/admin/user-list')}
+          >
+            <div className="card-body text-center">
+              <h5 className="card-title">Users</h5>
+              <p className="card-text">Manage users and their roles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-
-import React, { PureComponent } from 'react'
-
-export class Dashboard extends PureComponent {
-  render() {
-    return (
-      <div>Dashboard</div>
-    )
-  }
-}
-
-export default Dashboard
+export default AdminDashboard;

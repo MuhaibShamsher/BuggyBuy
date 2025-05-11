@@ -91,8 +91,8 @@ export default function OrderList() {
                   <Link
                     to={
                       userInfo.isAdmin
-                        ? `/admin/order/${order._id}`
-                        : `/order/${order._id}`
+                        ? `/admin/order-details/${order._id}`
+                        : `/admin/order-list`
                     }
                   >
                     <Button size="sm" variant="info">

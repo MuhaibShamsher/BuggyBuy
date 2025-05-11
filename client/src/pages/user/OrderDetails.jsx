@@ -174,7 +174,7 @@ export default function OrderDetails() {
                     <ListGroup.Item><Row><Col>Total:</Col><Col className="fw-bold">{addCurrency(order?.totalPrice)}</Col></Row></ListGroup.Item>
 
                     {/* Pay Order Button */}
-                    {!order?.isPaid && (
+                    {!order?.isPaid && !userInfo.isAdmin && (
                       <ListGroup.Item>
                         <Button
                           className="w-100 mt-3"
@@ -187,8 +187,20 @@ export default function OrderDetails() {
                       </ListGroup.Item>
                     )}
 
+                    {/* Not Pay Order Instruction */}
+                    {!order?.isPaid && userInfo.isAdmin && (
+                      <ListGroup.Item>
+                        <Button
+                          className="w-100 mt-3"
+                          variant="danger"
+                        >
+                          Payment Not Recieved
+                        </Button>
+                      </ListGroup.Item>
+                    )}
+
                     {/* Mark as Delivered Button */}
-                    {order?.isPaid && !order?.isDelivered && (
+                    {order?.isPaid && !order?.isDelivered && userInfo.isAdmin && (
                       <ListGroup.Item>
                         <Button
                           className="w-100 mt-3"

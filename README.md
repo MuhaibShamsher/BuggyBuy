@@ -1,14 +1,15 @@
-﻿# 🛡️ Vulnerable MERN E-Commerce Application
+﻿# 🛡Vulnerable MERN E-Commerce Application
 
 This is a deliberately vulnerable e-commerce web application built using the **MERN stack** (MongoDB, Express.js, React, Node.js). It is intended for educational use to help learn about common web security issues and test penetration techniques.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js (v22+)
 - MongoDB Atlas account
 - npm (Node Package Manager)
 - Cloudinary Account
+
 
 ### How to Set Up the Project Locally
 
@@ -38,7 +39,7 @@ npm start
 The backend will be running at http://localhost:5000
 
 
-## 🛠 Tools & Frameworks Used
+## Tools & Frameworks Used
 
 ### Development Stack
 - **Frontend:** React.js with Bootstrap  
@@ -46,9 +47,6 @@ The backend will be running at http://localhost:5000
 - **Database:** MongoDB (hosted on MongoDB Atlas)  
 - **Image Storage:** Cloudinary  
 
-### ☁️ Hosting
-- **Frontend:** Vercel  
-- **Backend:** Render  
 
 ### Security & Testing Tools
 - **OWASP Top 10 Vulnerabilities**  
@@ -56,7 +54,6 @@ The backend will be running at http://localhost:5000
 - **Developer Tools** (Browser DevTools, Postman, etc.)  
 - **JWT** for authentication  
 
----
 
 ## Vulnerabilities Covered
 - NoSQL Injection  
@@ -70,11 +67,10 @@ The backend will be running at http://localhost:5000
 - Weak JWT Secrets  
 - No Email Verification  
 
----
 
 ## Sample Credentials
 
-### 🛒 Customer Logins
+### Customer Logins
 - **User 01**  
   - Email: `user01@email.com`  
   - Password: `user01`  
@@ -87,11 +83,10 @@ The backend will be running at http://localhost:5000
 - Email: `admin@admin.com`  
 - Password: `admin123`  
 
----
 
-## 🔗 Live User Login
+## Live User Login
 [https://vulnerable-web-application-jecw.vercel.app/login](https://vulnerable-web-application-jecw.vercel.app/login)
 
-## 🔗 Live Admin Login
+## Live Admin Login
 [https://vulnerable-web-application-jecw.vercel.app/admin](https://vulnerable-web-application-jecw.vercel.app/admin)
 

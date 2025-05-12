@@ -75,7 +75,7 @@ The backend will be running at http://localhost:5000
   - Email: `user01@email.com`  
   - Password: `user01`  
 
-- **Alice Smith**  
+- **User 02**  
   - Email: `user02@email.com`  
   - Password: `user02`  
 

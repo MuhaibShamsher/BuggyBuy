@@ -1,4 +1,4 @@
-﻿# Vulnerable MERN E-Commerce Application
+﻿# BuggyBuy
 
 This is a deliberately vulnerable e-commerce web application built using the **MERN stack** (MongoDB, Express.js, React, Node.js). It is intended for educational use to help learn about common web security issues and test penetration techniques.
 
@@ -89,3 +89,7 @@ The backend will be running at http://localhost:5000
 - User Login: [https://vulnerable-web-application-jecw.vercel.app/login](https://vulnerable-web-application-jecw.vercel.app/login)
 - Admin Login: [https://vulnerable-web-application-jecw.vercel.app/admin](https://vulnerable-web-application-jecw.vercel.app/admin)
 
+
+## License
+
+This project is open-source and can be used for learning, training, and internal academic purposes.

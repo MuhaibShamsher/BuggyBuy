@@ -1,4 +1,4 @@
-﻿# 🛡Vulnerable MERN E-Commerce Application
+﻿# Vulnerable MERN E-Commerce Application
 
 This is a deliberately vulnerable e-commerce web application built using the **MERN stack** (MongoDB, Express.js, React, Node.js). It is intended for educational use to help learn about common web security issues and test penetration techniques.
 

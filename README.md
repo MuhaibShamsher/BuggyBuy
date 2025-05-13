@@ -84,9 +84,8 @@ The backend will be running at http://localhost:5000
 - Password: `admin123`  
 
 
-## Live User Login
-[https://vulnerable-web-application-jecw.vercel.app/login](https://vulnerable-web-application-jecw.vercel.app/login)
+## Live Link
 
-## Live Admin Login
-[https://vulnerable-web-application-jecw.vercel.app/admin](https://vulnerable-web-application-jecw.vercel.app/admin)
+- User Login: [https://vulnerable-web-application-jecw.vercel.app/login](https://vulnerable-web-application-jecw.vercel.app/login)
+- Admin Login: [https://vulnerable-web-application-jecw.vercel.app/admin](https://vulnerable-web-application-jecw.vercel.app/admin)
 

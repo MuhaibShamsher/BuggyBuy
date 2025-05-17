@@ -15,8 +15,8 @@ This is a deliberately vulnerable e-commerce web application built using the **M
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/MuhaibShamsher/Vulnerable-Web-Application.git
-cd vulnerable-Web-Application
+git clone https://github.com/MuhaibShamsher/BuggyBuy.git
+cd BuggyBuy
 ```
 ### 2. Client Setup:
 Navigate to the `client` directory:
